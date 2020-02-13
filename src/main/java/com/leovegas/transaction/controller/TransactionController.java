@@ -1,5 +1,7 @@
 package com.leovegas.transaction.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,5 +39,12 @@ public class TransactionController {
 	        )
 	public ResponseEntity<TransactionRequest> getTransaction(@PathVariable("transactionId") String transactionId){
 		return  new ResponseEntity<>(service.getTransaction(transactionId), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "accounts/{accountNumber}/transactions",
+	        produces = { "application/json; charset=utf-8" }
+	        )
+	public ResponseEntity<List<TransactionRequest>> getTransactions(@PathVariable("accountNumber") String accountNumber){
+		return  new ResponseEntity<>(service.getTransactions(accountNumber), HttpStatus.OK);
 	}
 }

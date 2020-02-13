@@ -4,9 +4,11 @@
 package com.leovegas.services.impl;
 
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
 
 import com.leovegas.exception.RecordNotFoundException;
@@ -87,6 +89,13 @@ public class TransactionServiceImpl implements TransactionService {
 		}
 		accDetails.setAmount(balance);
 		return accDetails;
+	}
+
+	@Override
+	public List<TransactionRequest> getTransactions(String accntNumber) {
+		TransactionRequest qRequest=new TransactionRequest();
+		qRequest.setAccountNumber(accntNumber);
+		return repository.findAll(Example.of(qRequest));
 	}
 
 }
