@@ -24,7 +24,6 @@ public class TransactionRequest {
 	
 	@Column(name="amount")
 	@NotNull
-	@NotEmpty
 	private Long amount;
 	
 	@Column(name="created_at")

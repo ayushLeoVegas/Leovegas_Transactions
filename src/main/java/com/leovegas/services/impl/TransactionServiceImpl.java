@@ -44,13 +44,13 @@ public class TransactionServiceImpl implements TransactionService {
 		if(null!=txnReq) {
 			throw new RecordNotFoundException("Transaction is already there");
 		}
-			if(!checkCreditDebit(accDetails.getAmount(),txnReq)) {
+			if(!checkCreditDebit(accDetails.getAmount(),request)) {
 				throw new RecordNotFoundException("Bad Transaction");
 			}
 			Timestamp createdAt = new Timestamp(System.currentTimeMillis());
 			request.setCreatedAt(createdAt);
 			response=repository.save(request);
-			accRepo.save(updateAccountAmount(accDetails, txnReq));
+			accRepo.save(updateAccountAmount(accDetails, request));
 		return response;
 	}
 
