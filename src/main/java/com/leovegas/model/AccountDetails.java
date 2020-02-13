@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name="ACCOUNT_DETAILS")
@@ -13,7 +14,8 @@ public class AccountDetails {
 
 	
 	@Column(name="amount")
-	private String amount;
+	@NotNull
+	private Long amount;
 	
 	@Column(name="created_at")
 	private Timestamp createdAt;
@@ -29,11 +31,11 @@ public class AccountDetails {
 	private String accountNumber;
 
 
-	public String getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(String amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 

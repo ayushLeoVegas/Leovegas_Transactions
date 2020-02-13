@@ -6,10 +6,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.validation.annotation.Validated;
@@ -20,13 +19,13 @@ import org.springframework.validation.annotation.Validated;
 public class TransactionRequest {
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="transaction_id")
 	private Long transactionId;
 	
 	@Column(name="amount")
 	@NotNull
-	private String amount;
+	@NotEmpty
+	private Long amount;
 	
 	@Column(name="created_at")
 	private Timestamp createdAt;
@@ -38,6 +37,7 @@ public class TransactionRequest {
 	
 	@Column(name="currency")
 	@NotNull
+	@NotEmpty
 	private String currency;
 	
 	@Column(name="player_id")
@@ -45,6 +45,7 @@ public class TransactionRequest {
 	
 	@Column(name="account_number")
 	@NotNull
+	@NotEmpty
 	private String accountNumber;
 
 	public Long getTransactionId() {
@@ -55,11 +56,11 @@ public class TransactionRequest {
 		this.transactionId = transactionId;
 	}
 
-	public String getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(String amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 

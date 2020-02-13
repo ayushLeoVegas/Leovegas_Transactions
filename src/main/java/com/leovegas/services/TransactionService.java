@@ -3,6 +3,7 @@
  */
 package com.leovegas.services;
 
+import com.leovegas.exception.RecordNotFoundException;
 import com.leovegas.model.TransactionRequest;
 
 /**
@@ -12,7 +13,7 @@ import com.leovegas.model.TransactionRequest;
 public interface TransactionService {
 
 	
-	public TransactionRequest createTransaction(TransactionRequest request);
+	public TransactionRequest createTransaction(TransactionRequest request) throws RecordNotFoundException;
 	
 	public TransactionRequest getTransaction(String txnId);
 }

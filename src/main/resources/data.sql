@@ -4,7 +4,7 @@ DROP TABLE IF EXISTS account_details;
  
 CREATE TABLE transaction_details (
   transaction_id bigint AUTO_INCREMENT  PRIMARY KEY,
-  amount VARCHAR(250) NOT NULL,
+  amount bigint NOT NULL,
   created_at TIMESTAMP NOT NULL,
   direction ENUM ('CREDIT','DEBIT') NOT NULL,
   currency VARCHAR(250) NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE transaction_details (
 
 
 CREATE TABLE account_details (
-  amount VARCHAR(250) NOT NULL,
+  amount bigint NOT NULL,
   created_at TIMESTAMP NOT NULL,
   currency VARCHAR(250) NOT NULL,
   player_id VARCHAR(250) NOT NULL,
