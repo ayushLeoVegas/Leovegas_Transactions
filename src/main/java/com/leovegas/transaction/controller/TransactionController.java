@@ -2,6 +2,8 @@ package com.leovegas.transaction.controller;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,8 @@ import com.leovegas.services.TransactionService;
 @RequestMapping(value = "${microservice.context.path:}")
 public class TransactionController {
 	
+	private static final Logger logger = LogManager.getLogger(TransactionController.class);
+	
 	@Autowired
 	private TransactionService service;
 
@@ -30,6 +34,7 @@ public class TransactionController {
 	        )
 	public ResponseEntity<TransactionRequest> createTransaction(@Validated @RequestBody TransactionRequest request
 			,@RequestHeader(name="Accept") String accept ) throws RecordNotFoundException{
+		logger.info("Entering into create Transactions Controller");
 		TransactionRequest response=service.createTransaction(request);
 		return new ResponseEntity<>(response, HttpStatus.CREATED);
 	}
@@ -38,6 +43,7 @@ public class TransactionController {
 	        produces = { "application/json; charset=utf-8" }
 	        )
 	public ResponseEntity<TransactionRequest> getTransaction(@PathVariable("transactionId") String transactionId){
+		logger.info("Entering into Get Transactions Controller");
 		return  new ResponseEntity<>(service.getTransaction(transactionId), HttpStatus.OK);
 	}
 	
@@ -45,6 +51,7 @@ public class TransactionController {
 	        produces = { "application/json; charset=utf-8" }
 	        )
 	public ResponseEntity<List<TransactionRequest>> getTransactions(@PathVariable("accountNumber") String accountNumber){
+		logger.info("Entering into get All Transactions Controller");
 		return  new ResponseEntity<>(service.getTransactions(accountNumber), HttpStatus.OK);
 	}
 }

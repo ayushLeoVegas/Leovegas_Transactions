@@ -7,6 +7,8 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Component;
@@ -26,6 +28,8 @@ import com.leovegas.transaction.repository.TransactionRepository;
 
 @Component
 public class TransactionServiceImpl implements TransactionService {
+	
+	private static final Logger logger = LogManager.getLogger(TransactionServiceImpl.class);
 
 	@Autowired
 	private TransactionRepository repository;
@@ -36,6 +40,7 @@ public class TransactionServiceImpl implements TransactionService {
 	@Override
 	public TransactionRequest createTransaction(TransactionRequest request) throws RecordNotFoundException {
 		
+		logger.info("Enetring into create Trasaction Service");
 		//Check Account Details
 		TransactionRequest response=null;
 		AccountDetails accDetails=accRepo.getOne(request.getAccountNumber(), request.getPlayerId());
@@ -53,6 +58,7 @@ public class TransactionServiceImpl implements TransactionService {
 			request.setCreatedAt(createdAt);
 			response=repository.save(request);
 			accRepo.save(updateAccountAmount(accDetails, request));
+			logger.info("Exiting create Trasaction Service");
 		return response;
 	}
 
